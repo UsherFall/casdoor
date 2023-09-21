@@ -149,7 +149,7 @@ func (a *AzureACSEmailProvider) sendEmail(e *Email) error {
 	defer resp.Body.Close()
 
 	// Response error Handling
-	if resp.StatusCode == http.StatusBadRequest {
+	if resp.StatusCode == http.StatusBadRequest || resp.StatusCode == http.StatusUnauthorized {
 		commError := ErrorResponse{}
 
 		err = json.NewDecoder(resp.Body).Decode(&commError)
